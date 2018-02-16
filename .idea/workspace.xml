@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68c6661b-5f77-4675-9a5e-c9321e005e71" name="Default" comment="" />
+    <list default="true" id="68c6661b-5f77-4675-9a5e-c9321e005e71" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/EthanSigma.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BlokusBoard.java" afterPath="$PROJECT_DIR$/src/BlokusBoard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ClientMain.java" afterPath="$PROJECT_DIR$/src/ClientMain.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,18 +28,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlokusBoard.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BlokusBoard.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/BlokusBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="451" column="63" lean-forward="true" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="63" />
+            <state relative-caret-position="442">
+              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3018#3019#0" expanded="true" />
-                <element signature="e#3054#3055#0" expanded="true" />
                 <element signature="method#toString#0;class#BlokusBoard#0" expanded="false" />
-                <element signature="e#6605#6606#0" expanded="true" />
-                <element signature="e#6644#6645#0" expanded="true" />
                 <element signature="method#draw#0;class#BlokusBoard#0" expanded="false" />
                 <element signature="method#moveLocations#0;class#BlokusBoard#0" expanded="false" />
                 <element signature="method#notOrthogonalToSelf#0;class#BlokusBoard#0" expanded="false" />
@@ -47,9 +47,21 @@
       <file leaf-file-name="ClientMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ClientMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="35" column="42" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="42" />
+            <state relative-caret-position="327">
+              <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EthanSigma.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EthanSigma.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="354">
+              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,8 +79,8 @@
       <file leaf-file-name="RandomAI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RandomAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+            <state relative-caret-position="507">
+              <caret line="72" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -99,6 +111,9 @@
       <replace />
     </replaceStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -121,20 +136,21 @@
         <option value="$PROJECT_DIR$/src/Shape.java" />
         <option value="$PROJECT_DIR$/src/RandomAI.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
-        <option value="$PROJECT_DIR$/src/ClientMain.java" />
         <option value="$PROJECT_DIR$/src/BigMoverAI.java" />
         <option value="$PROJECT_DIR$/src/MostMovesAI.java" />
-        <option value="$PROJECT_DIR$/src/BlokusBoard.java" />
         <option value="$PROJECT_DIR$/src/DisplayScreen.java" />
         <option value="$PROJECT_DIR$/src/ServersListener.java" />
+        <option value="$PROJECT_DIR$/src/BlokusBoard.java" />
+        <option value="$PROJECT_DIR$/src/ClientMain.java" />
+        <option value="$PROJECT_DIR$/src/EthanSigma.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1672" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1696" />
-    <option name="height" value="1066" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -151,27 +167,30 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Blockus AI - Solution - Share" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Blockus AI - Solution - Share" type="462c0819:PsiDirectoryNode" />
+              <item name="EthanSigma" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EthanSigma" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Blockus AI - Solution - Share" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Blockus AI - Solution - Share" type="462c0819:PsiDirectoryNode" />
+              <item name="EthanSigma" type="b2602c69:ProjectViewProjectNode" />
+              <item name="EthanSigma" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -301,8 +320,8 @@
     </list>
     <recent_temporary>
       <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.ClientMain" />
-        <item index="1" class="java.lang.String" itemvalue="Application.ServerMain" />
+        <item index="0" class="java.lang.String" itemvalue="Application.ServerMain" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ClientMain" />
       </list>
     </recent_temporary>
   </component>
@@ -320,33 +339,34 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1672" y="-8" width="1040" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31838074" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06326531" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1279762" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31917337" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32997763" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -388,24 +408,13 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/IntPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="32" column="36" lean-forward="false" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/BlokusBoard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5491">
           <caret line="346" column="90" lean-forward="false" selection-start-line="346" selection-start-column="90" selection-end-line="346" selection-end-column="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3018#3019#0" expanded="true" />
-            <element signature="e#3054#3055#0" expanded="true" />
             <element signature="method#toString#0;class#BlokusBoard#0" expanded="false" />
-            <element signature="e#6605#6606#0" expanded="true" />
-            <element signature="e#6644#6645#0" expanded="true" />
             <element signature="method#draw#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#moveLocations#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#notOrthogonalToSelf#0;class#BlokusBoard#0" expanded="false" />
@@ -486,11 +495,7 @@
           <caret line="243" column="32" lean-forward="false" selection-start-line="243" selection-start-column="32" selection-end-line="243" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3018#3019#0" expanded="true" />
-            <element signature="e#3054#3055#0" expanded="true" />
             <element signature="method#toString#0;class#BlokusBoard#0" expanded="false" />
-            <element signature="e#6605#6606#0" expanded="true" />
-            <element signature="e#6644#6645#0" expanded="true" />
             <element signature="method#draw#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#moveLocations#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#notOrthogonalToSelf#0;class#BlokusBoard#0" expanded="false" />
@@ -587,11 +592,7 @@
           <caret line="39" column="14" lean-forward="false" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3018#3019#0" expanded="true" />
-            <element signature="e#3054#3055#0" expanded="true" />
             <element signature="method#toString#0;class#BlokusBoard#0" expanded="false" />
-            <element signature="e#6605#6606#0" expanded="true" />
-            <element signature="e#6644#6645#0" expanded="true" />
             <element signature="method#draw#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#moveLocations#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#notOrthogonalToSelf#0;class#BlokusBoard#0" expanded="false" />
@@ -662,7 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -671,8 +671,8 @@
         <state relative-caret-position="289">
           <caret line="45" column="24" lean-forward="false" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
           <folding>
-            <element signature="e#925#926#0" expanded="true" />
-            <element signature="e#957#958#0" expanded="true" />
+            <element signature="e#925#926#0" expanded="false" />
+            <element signature="e#957#958#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -705,34 +705,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ClientMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="35" column="42" lean-forward="false" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomAI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="33" column="40" lean-forward="true" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+        <state relative-caret-position="327">
+          <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/BlokusBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="451" column="63" lean-forward="true" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="63" />
+        <state relative-caret-position="442">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3018#3019#0" expanded="true" />
-            <element signature="e#3054#3055#0" expanded="true" />
             <element signature="method#toString#0;class#BlokusBoard#0" expanded="false" />
-            <element signature="e#6605#6606#0" expanded="true" />
-            <element signature="e#6644#6645#0" expanded="true" />
             <element signature="method#draw#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#moveLocations#0;class#BlokusBoard#0" expanded="false" />
             <element signature="method#notOrthogonalToSelf#0;class#BlokusBoard#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RandomAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="72" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="72" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EthanSigma.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="354">
+          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -473,7 +473,7 @@ public class BlokusBoard
      * Makes the provided move, for the provided player
      * this method does not change turns, validate the move
      * or mark the piece as used.
-     * @param move - the desired move
+     * @param move - the desired moves
      * @param color - the color trying to make the move
      */
     public void placePiece(Move move, int color)
