@@ -379,6 +379,7 @@ public class BlokusBoard
                 //System.out.println("*Shape already in used for color "+color);
                 return false;
             }
+            //hahaha gay
             int leftC = move.getPoint().getX();
             int topR = move.getPoint().getY();
             ArrayList<IntPoint> coloredSpots = new ArrayList<>();
