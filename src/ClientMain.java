@@ -36,9 +36,6 @@ public class ClientMain
         Player myAIasOrange = new RandomAI(BlokusBoard.ORANGE, "Clients Random AI");
         Player myAIasPurple = new RandomAI(BlokusBoard.PURPLE, "Clients Random AI");
 
-        myAIasOrange = new RandomAI(BlokusBoard.ORANGE, "Clients Random AI");
-        myAIasPurple = new RandomAI(BlokusBoard.PURPLE, "Clients Random AI");
-
         String myAI_Name = myAIasOrange.getName();
         String opponentName = "";
         Player currentlyPlaying = null;

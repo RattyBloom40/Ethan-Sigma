@@ -48,7 +48,6 @@ public class ServersListener implements Runnable
         // Adds testing AIs
         testingAIsAsOrange.add(new RandomAI(board.ORANGE, "Servers Random AI"));
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
-
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs
