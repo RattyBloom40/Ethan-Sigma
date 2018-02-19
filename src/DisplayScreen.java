@@ -23,7 +23,6 @@ public class DisplayScreen extends JFrame implements Runnable, KeyListener
         super();
         this.board = board;
         setSize(700,420);
-
         addKeyListener(this);
         img = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_ARGB);
         setUndecorated(true);

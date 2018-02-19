@@ -15,6 +15,8 @@ public class Shape
     public static final int ONE_EIGHTY=2;
     public static final int TWO_SEVENTY=3;
 
+    private int squareCount = 0;
+
     public Shape(boolean[][] initial)
     {
         forms.add(initial);
@@ -25,6 +27,11 @@ public class Shape
         forms.add(rotate(flip(initial),1));
         forms.add(rotate(flip(initial),2));
         forms.add(rotate(flip(initial),3));
+
+        for(int r=0; r<initial.length; r++)
+            for(int c=0; c<initial[0].length;c++)
+                if(initial[r][c])
+                    squareCount++;
     }
 
     /**
@@ -145,6 +152,14 @@ public class Shape
         }
 
         return newShape;
+    }
+
+    /**
+     * Returns the number of used possitions in the shape
+     */
+    public int getSquareCount()
+    {
+        return squareCount;
     }
 
     /**
