@@ -33,8 +33,8 @@ public class ClientMain
         int mode = 0;
 
         // Change this to your AI!!!
-        Player myAIasOrange = new RandomAI(BlokusBoard.ORANGE, "Clients Random AI");
-        Player myAIasPurple = new RandomAI(BlokusBoard.PURPLE, "Clients Random AI");
+        Player myAIasOrange = new EthanSigma(BlokusBoard.ORANGE, "Ethan Sigma");
+        Player myAIasPurple = new EthanSigma(BlokusBoard.PURPLE, "Ethan Sigma");
 
         String myAI_Name = myAIasOrange.getName();
         String opponentName = "";

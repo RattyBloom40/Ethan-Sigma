@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+enum State{Start,Invade,Block,Fill}
+
 public class EthanSigma extends Player{
     public EthanSigma(int color,String name)
     {
@@ -14,6 +16,8 @@ public class EthanSigma extends Player{
      */
     public Move getMove(BlokusBoard board)
     {
+        return null;
+        /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
         Collections.shuffle(avaiableMoves);
@@ -50,6 +54,8 @@ public class EthanSigma extends Player{
                 }
             return null;
         }
+        */
+
     }
 
     /**
