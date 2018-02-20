@@ -43,7 +43,7 @@ public class EthanSigma extends Player {
      * @return a valid move, null if non can be found
      */
     public Move getMove(BlokusBoard board) {
-        Move end = null;
+        SigmoidMove end = null;
         turn++;
 
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
@@ -58,6 +58,7 @@ public class EthanSigma extends Player {
 
         switch (state) {
             case Start:
+                end = Math.random() < .5 ? new SigmoidMove(P5, (Math.random() < .5 ? true : false), 0, avaiableMoves.get(0)) : new SigmoidMove(O4, (false), 0, avaiableMoves.get(0));
                 break;
             case Invade:
                 break;
