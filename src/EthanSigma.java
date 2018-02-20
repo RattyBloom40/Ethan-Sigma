@@ -13,6 +13,25 @@ public class EthanSigma extends Player {
 
     public static final int I1 = 0;
     public static final int I2 = 1;
+    public static final int I3 = 2;
+    public static final int V3 = 3;
+    public static final int I4 = 4;
+    public static final int L4 = 5;
+    public static final int T4 = 6;
+    public static final int O4 = 7;
+    public static final int Z4 = 8;
+    public static final int I5 = 9;
+    public static final int L5 = 10;
+    public static final int N5 = 11;
+    public static final int P5 = 12;
+    public static final int U5 = 11;
+    public static final int Y5 = 12;
+    public static final int T5 = 13;
+    public static final int V5 = 14;
+    public static final int W5 = 15;
+    public static final int Z5 = 16;
+    public static final int F5 = 17;
+    public static final int X5 = 18;
 
     int turn = 0;
     State state;
