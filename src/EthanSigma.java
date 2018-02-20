@@ -1,35 +1,40 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-enum State{Start,Invade,Block,Fill}
+enum State {Start, Invade, Block, Fill}
 
-public class EthanSigma extends Player{
-    public EthanSigma(int color,String name)
-    {
+public class EthanSigma extends Player {
+    private BlokusBoard board;
+
+    public EthanSigma(int color, String name) {
         super(color, name);
         state = State.Start;
     }
+
+    public static final int I1 = 0;
+    public static final int I2 = 1;
 
     int turn = 0;
     State state;
 
     /**
      * Returns a valid move.
+     *
      * @param board - the board that a move should be made on
      * @return a valid move, null if non can be found
      */
-    public Move getMove(BlokusBoard board)
-    {
+    public Move getMove(BlokusBoard board) {
         Move end = null;
         turn++;
 
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
         ArrayList<Integer> usableShapePositions = new ArrayList<>();
-        boolean[] used = (getColor()==BlokusBoard.ORANGE)?board.getOrangeUsedShapes():board.getPurpleUsedShapes();
-        for(int x=0; x<used.length; x++)
-            if(!used[x])
+
+        boolean[] used = (getColor() == BlokusBoard.ORANGE) ? board.getOrangeUsedShapes() : board.getPurpleUsedShapes();
+        for (int x = 0; x < used.length; x++)
+            if (!used[x])
                 usableShapePositions.add(x);
-        if(usableShapePositions.isEmpty() ||avaiableMoves.isEmpty())
+        if (usableShapePositions.isEmpty() || avaiableMoves.isEmpty())
             return null;
 
         switch (state) {
@@ -87,10 +92,10 @@ public class EthanSigma extends Player{
 
     /**
      * Returns a clone of the player
+     *
      * @return a clone of this player
      */
-    public Player freshCopy()
-    {
-        return new EthanSigma(getColor(),getName());
+    public Player freshCopy() {
+        return new EthanSigma(getColor(), getName());
     }
 }
