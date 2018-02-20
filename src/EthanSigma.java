@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+enum State{Start,Invade,Block,Fill}
+
 public class EthanSigma extends Player{
     public EthanSigma(int color,String name)
     {
         super(color, name);
+        state = State.Start;
     }
+
+    int turn = 0;
+    State state;
 
     /**
      * Returns a valid move.
@@ -14,6 +20,31 @@ public class EthanSigma extends Player{
      */
     public Move getMove(BlokusBoard board)
     {
+        Move end = null;
+        turn++;
+
+        ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
+        ArrayList<Integer> usableShapePositions = new ArrayList<>();
+        boolean[] used = (getColor()==BlokusBoard.ORANGE)?board.getOrangeUsedShapes():board.getPurpleUsedShapes();
+        for(int x=0; x<used.length; x++)
+            if(!used[x])
+                usableShapePositions.add(x);
+        if(usableShapePositions.isEmpty() ||avaiableMoves.isEmpty())
+            return null;
+
+        switch (state) {
+            case Start:
+                break;
+            case Invade:
+                break;
+            case Fill:
+                break;
+            case Block:
+                break;
+        }
+
+        return end;
+        /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
         Collections.shuffle(avaiableMoves);
@@ -50,6 +81,8 @@ public class EthanSigma extends Player{
                 }
             return null;
         }
+        */
+
     }
 
     /**
