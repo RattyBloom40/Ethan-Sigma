@@ -22,6 +22,7 @@ public class EthanSigma extends Player{
     {
         Move end = null;
         turn++;
+
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
         ArrayList<Integer> usableShapePositions = new ArrayList<>();
         boolean[] used = (getColor()==BlokusBoard.ORANGE)?board.getOrangeUsedShapes():board.getPurpleUsedShapes();
