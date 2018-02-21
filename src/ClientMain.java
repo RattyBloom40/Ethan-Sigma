@@ -9,7 +9,7 @@ import java.util.*;
 public class ClientMain
 {
     // stores the servers address
-    public static String ip = "T155189"/*"127.0.0.1"*/;
+    public static final String ip = "127.0.0.1";
     // stores the port to use for connecting to the sever
     public static final int port = 8621;
 
@@ -33,23 +33,12 @@ public class ClientMain
         int mode = 0;
 
         // Change this to your AI!!!
-        Player myAIasOrange = new EthanSigma(BlokusBoard.ORANGE, "Ethan Sigma");
-        Player myAIasPurple = new EthanSigma(BlokusBoard.PURPLE, "Ethan Sigma");
+        Player myAIasOrange = new RandomAI(BlokusBoard.ORANGE, "Clients random AI");
+        Player myAIasPurple = new RandomAI(BlokusBoard.PURPLE, "Clients random AI");
 
         String myAI_Name = myAIasOrange.getName();
         String opponentName = "";
         Player currentlyPlaying = null;
-
-        System.out.println("-Connection Type-");
-        System.out.println("1. Tully's Server");
-        System.out.println("2. Local Server");
-        System.out.print("Enter selection: ");
-        mode = keyboard.nextInt();
-
-        if(mode==1)
-            ip = "T155189";
-        else
-            ip = "127.0.0.1";
 
         while(true)
         {
@@ -216,7 +205,7 @@ public class ClientMain
                             }
                             else if(comFromServer.getCommand()==CommandToClient.MAKE_MOVE)
                             {
-                                m = currentlyPlaying.getMove(board);
+                                m = currentlyPlaying.getMove(new BlokusBoard(board));
                                 os.reset();
                                 os.writeObject(new CommandToServer(CommandToServer.MOVE,m));
                                 os.reset();

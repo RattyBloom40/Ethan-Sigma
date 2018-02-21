@@ -28,6 +28,15 @@ public abstract class Player
     }
 
     /**
+     * Returns the other player's color
+     * @return the color of the other player
+     */
+    public int getOtherColor() {
+
+        return (color==BlokusBoard.ORANGE)?BlokusBoard.PURPLE:BlokusBoard.ORANGE;
+    }
+
+    /**
      * REturns the player's name
      * @return player name
      */

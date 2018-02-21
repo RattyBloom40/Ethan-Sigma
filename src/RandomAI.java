@@ -46,7 +46,7 @@ public class RandomAI extends Player
                 for(Integer position: usableShapePositions)
                 {
                     for(int i=0; i<8;i++) {
-                        boolean flip = i >= 3;
+                        boolean flip = i > 3;
                         int rotation = i % 4;
                         boolean[][] shape = board.getShapes().get(position).manipulatedShape(flip, rotation);
                         for (int r = -shape.length+1; r <shape.length;  r++)
