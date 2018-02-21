@@ -49,7 +49,18 @@ public class EthanSigma extends Player {
         zones = board.getBoard();
         for (int r = 0; r < 14; r++)
             for (int c = 0; c < 14; c++) {
-                //if()
+                if (zones[r][c] == BlokusBoard.EMPTY) {
+                    int numO, numP = numO = 0;
+                    for (int x = -5; x < 6; x++)
+                        for (int y = -5; y < 6; y++)
+                            try {
+                                if (zones[r + y][c + x] == BlokusBoard.ORANGE)
+                                    numO++;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                }
             }
 
         SigmoidMove end = null;
@@ -70,14 +81,14 @@ public class EthanSigma extends Player {
                 end = Math.random() < .5 ? new SigmoidMove(P5, (Math.random() < .5 ? true : false), 0, avaiableMoves.get(0)) : new SigmoidMove(O4, (false), 0, avaiableMoves.get(0));
                 break;
             case Invade:
-                for(int spot=0;spot<avaiableMoves.size();spot++){
-                    for(int shape=0;shape<usableShapePositions.size();shape++){
-                        for(int rotNo=0;rotNo<4;rotNo++){
-                            for(int flip=0;flip<2;flip++){
-                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape),flip==0,rotNo,avaiableMoves.get(spot));
-                                if(board.isValidMove(curr,getColor())){
-                                    end = (end==null||end.getScore(State.Invade)<curr.getScore(State.Invade))?curr:end;
-                                    if(Math.random()<.5&&end.getScore(State.Invade)==curr.getScore(State.Invade)){
+                for (int spot = 0; spot < avaiableMoves.size(); spot++) {
+                    for (int shape = 0; shape < usableShapePositions.size(); shape++) {
+                        for (int rotNo = 0; rotNo < 4; rotNo++) {
+                            for (int flip = 0; flip < 2; flip++) {
+                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, avaiableMoves.get(spot));
+                                if (board.isValidMove(curr, getColor())) {
+                                    end = (end == null || end.getScore(State.Invade) < curr.getScore(State.Invade)) ? curr : end;
+                                    if (Math.random() < .5 && end.getScore(State.Invade) == curr.getScore(State.Invade)) {
                                         end = curr;
                                     }
                                 }
