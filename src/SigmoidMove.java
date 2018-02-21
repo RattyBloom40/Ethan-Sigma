@@ -3,7 +3,7 @@ public class SigmoidMove extends Move {
         super(pieceNumber, flip, rotation, point);
     }
 
-    public double getScore(EthanSigma.State state) {
+    public double getScore(EthanSigma.State state, int[][]zone, int color) {
         switch (state) {
             case Invade:
                 //for each spot made available, score+= 196-distance to zone
@@ -12,8 +12,7 @@ public class SigmoidMove extends Move {
         return Integer.MIN_VALUE;
     }
 
-    public double distanceToZone(int[][] zone) {
-        return 0;
-    }
+    /*public double distanceToZone(int[][] zone, int color) {
 
+    }*/
 }
