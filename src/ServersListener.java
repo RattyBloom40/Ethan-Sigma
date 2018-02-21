@@ -29,7 +29,7 @@ public class ServersListener implements Runnable
 
     // Category Names
     private ArrayList<String> categories = new ArrayList<String>();
-    private int numberOfGameToPlay = 10;
+    private int numberOfGameToPlay = 1000;
     private CommandToClient commandFromSerever = null;
 
     // name of the connected AI
@@ -48,6 +48,8 @@ public class ServersListener implements Runnable
         // Adds testing AIs
         testingAIsAsOrange.add(new RandomAI(board.ORANGE, "Servers Random AI"));
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
+        testingAIsAsOrange.add(new BigMoverAI(board.ORANGE, "Servers Big Mover AI"));
+        testingAIsAsPurple.add(new BigMoverAI(board.PURPLE, "Servers Big Mover AI"));
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs

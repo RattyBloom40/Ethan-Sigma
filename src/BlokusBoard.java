@@ -50,6 +50,12 @@ public class BlokusBoard
     // stores the custom color of purple
     private Color purple = new Color(163,73,163);
 
+    // purple move locations
+    ArrayList<IntPoint> purpleMoveLocations = new ArrayList<>();
+
+    // orange move locations
+    ArrayList<IntPoint> orangeMoveLocations = new ArrayList<>();
+
     /**
      * Creates the initial game board
      */
@@ -93,8 +99,33 @@ public class BlokusBoard
             orangeUsedShapes[i]=b.getOrangeUsedShapes()[i];
             purpleUsedShapes[i]=b.getPurpleUsedShapes()[i];
         }
+
+        for(IntPoint p: b.getPurpleMoveLocations())
+            purpleMoveLocations.add(p);
+
+        for(IntPoint p: b.getOrangeMoveLocations())
+            orangeMoveLocations.add(p);
+
+
     }
 
+    /**
+     * Returns locations where purple might be able to place pieces
+     * @return list of possible moves locations for purple
+     */
+    public ArrayList<IntPoint> getPurpleMoveLocations()
+    {
+        return purpleMoveLocations;
+    }
+
+    /**
+     * Returns locations where orange might be able to place pieces
+     * @return list of possible moves locations for orange
+     */
+    public ArrayList<IntPoint> getOrangeMoveLocations()
+    {
+        return orangeMoveLocations;
+    }
     /**
      * Returns if oranged skipped their last turn
      * @return true when orange skipped its last turn
@@ -216,6 +247,12 @@ public class BlokusBoard
         orangeSkipped=purpleSkipped=false;
         for(int i=0; i<orangeUsedShapes.length;i++)
             orangeUsedShapes[i]=purpleUsedShapes[i]=false;
+
+        orangeMoveLocations.clear();
+        purpleMoveLocations.clear();
+
+        orangeMoveLocations.add(new IntPoint(4,4));
+        purpleMoveLocations.add(new IntPoint(9,9));
     }
 
     /**
@@ -333,20 +370,25 @@ public class BlokusBoard
             }
 
         // draw move positions for Orange
-        if(turn==ORANGE)
-            for(IntPoint ip: moveLocations(ORANGE))
-            {
-                g.setColor(Color.ORANGE);
-                g.fillOval(offSetX+ip.getX()*LARGE_DIM+4,offSetY+ip.getY()*LARGE_DIM+4,LARGE_DIM-8,LARGE_DIM-8);
-            }
-        // draw move positions for Purplue
-        if(turn==PURPLE)
-            for(IntPoint ip: moveLocations(PURPLE))
-            {
-                g.setColor(purple);
-                g.fillOval(offSetX+ip.getX()*LARGE_DIM+4,offSetY+ip.getY()*LARGE_DIM+4,LARGE_DIM-8,LARGE_DIM-8);
-            }
+        if(turn==ORANGE) {
+            ArrayList<IntPoint> moveLocs = moveLocations(ORANGE);
 
+            for (int i=0; i<moveLocs.size();i++) {
+                IntPoint ip = moveLocs.get(i);
+                g.setColor(Color.ORANGE);
+                g.fillOval(offSetX + ip.getX() * LARGE_DIM + 4, offSetY + ip.getY() * LARGE_DIM + 4, LARGE_DIM - 8, LARGE_DIM - 8);
+            }
+        }
+        // draw move positions for Purplue
+        if(turn==PURPLE) {
+            ArrayList<IntPoint> moveLocs = moveLocations(PURPLE);
+
+            for (int i=0; i<moveLocs.size();i++) {
+                IntPoint ip = moveLocs.get(i);
+                g.setColor(purple);
+                g.fillOval(offSetX + ip.getX() * LARGE_DIM + 4, offSetY + ip.getY() * LARGE_DIM + 4, LARGE_DIM - 8, LARGE_DIM - 8);
+            }
+        }
         // draw results
         if(status() != PLAYING) {
             g.setColor(Color.GREEN);
@@ -357,10 +399,7 @@ public class BlokusBoard
                 g.drawString("Purple Wins!!!",150,200);
             else
                 g.drawString("Tie Game!!!",150,200);
-
         }
-
-
     }
 
     // returns true if the move list is valid
@@ -376,10 +415,9 @@ public class BlokusBoard
         if(turn==color)
         {
             if(((color==ORANGE)?orangeUsedShapes:purpleUsedShapes)[move.getPieceNumber()]==true) {
-                //System.out.println("*Shape already in used for color "+color);
+
                 return false;
             }
-            //hahaha gay
             int leftC = move.getPoint().getX();
             int topR = move.getPoint().getY();
             ArrayList<IntPoint> coloredSpots = new ArrayList<>();
@@ -389,19 +427,16 @@ public class BlokusBoard
                     if(shape[r][c]) {
                         coloredSpots.add(new IntPoint(leftC + c, topR + r));
                     }
-            if(color==ORANGE && coloredSpots.contains(new IntPoint(4,4))&& board[4][4]==EMPTY)
-                return true;
-            else if(color==PURPLE && coloredSpots.contains(new IntPoint(9,9))&& board[9][9]==EMPTY)
-                return true;
-            else if(!sharePoint(coloredSpots,moveLocations(color))) {
-                //System.out.println("*Not on a valid move location");
+
+            if(!sharePoint(coloredSpots,moveLocations(color))) {
+
                 return false;
             }
             else
             {
                 for(IntPoint p: coloredSpots)
                     if(!isInGrid(p.getX(),p.getY()) || board[p.getY()][p.getX()]!=EMPTY || !notOrthogonalToSelf(p.getX(),p.getY(),color)) {
-                        //System.out.println("*not in grid or not empty or is orthogonal");
+
                         return false;
                     }
                 return true;
@@ -409,7 +444,7 @@ public class BlokusBoard
         }
         else
         {
-            //System.out.println("*wrong turn");
+
             return false;
         }
     }
@@ -445,16 +480,51 @@ public class BlokusBoard
             int topR = move.getPoint().getY();
 
             boolean[][] shape = shapes.get(move.getPieceNumber()).manipulatedShape(move.isFlip(),move.getRotation());
+
+            ArrayList<IntPoint> coloredSpots = new ArrayList<>();
             for(int r=0; r<shape.length; r++)
                 for(int c=0; c<shape[0].length; c++)
-                    if(shape[r][c])
-                        board[topR+r][leftC+c]=color;
+                    if(shape[r][c]) {
+                        IntPoint p = new IntPoint(leftC + c, topR + r);
+                        board[topR + r][leftC + c] = color;
+                        coloredSpots.add(p);
+                        purpleMoveLocations.remove(p);
+                        orangeMoveLocations.remove(p);
+                    }
 
             ((color==ORANGE)?orangeUsedShapes:purpleUsedShapes)[move.getPieceNumber()]=true;
-            if(color==ORANGE)
-                orangeSkipped=false;
+            if(color==ORANGE) {
+                for(IntPoint p: coloredSpots)
+                    orangeMoveLocations.remove(p);
+
+                int endR = topR+1+shape.length;
+                int endC = leftC+1+shape[0].length;
+                int startC = leftC-1;
+                for(int r=topR-1; r<endR; r++)
+                    for(int c=startC; c<endC; c++) {
+                        IntPoint p = new IntPoint(c,r);
+                        if(isInGrid(c,r) && board[r][c]==EMPTY && !orangeMoveLocations.contains(p) && diagonalToColor(c,r,color) && notOrthogonalToSelf(c,r,color))
+                            orangeMoveLocations.add(p);
+                    }
+                orangeSkipped = false;
+            }
             else if(color==PURPLE)
-                purpleSkipped=false;
+            {
+                for(IntPoint p: coloredSpots)
+                    purpleMoveLocations.remove(p);
+
+                int endR = topR+1+shape.length;
+                int endC = leftC+1+shape[0].length;
+                int startC = leftC-1;
+                for(int r=topR-1; r<endR; r++)
+                    for(int c=startC; c<endC; c++) {
+                        IntPoint p = new IntPoint(c,r);
+                        if(isInGrid(c,r) &&board[r][c]==EMPTY && !purpleMoveLocations.contains(p) && diagonalToColor(c,r,color) && notOrthogonalToSelf(c,r,color))
+                            purpleMoveLocations.add(p);
+                    }
+
+                orangeSkipped = false;
+            }
             changeTurns();
             return true;
         }
@@ -466,63 +536,67 @@ public class BlokusBoard
                 purpleSkips();
                 changeTurns();
             }
+            System.out.println("bad move 3");
             return false;
         }
     }
 
     /**
-     * Makes the provided move, for the provided player
-     * this method does not change turns, validate the move
-     * or mark the piece as used.
+     * WARNING - this methods does not validate the move being taken away
+     * The methods changes the provide move back to EMPTIES and adjusts
+     * both move location lists.
+     * NOTE: This method does NOT change turns
      * @param move - the desired move
-     * @param color - the color trying to make the move
      */
-    public void placePiece(Move move, int color)
+    public void undoMovePiece(Move move, int color)
     {
-
         try {
             int leftC = move.getPoint().getX();
             int topR = move.getPoint().getY();
 
             boolean[][] shape = shapes.get(move.getPieceNumber()).manipulatedShape(move.isFlip(), move.getRotation());
+
+
             for (int r = 0; r < shape.length; r++)
                 for (int c = 0; c < shape[0].length; c++)
-                    if (shape[r][c])
-                        board[topR + r][leftC + c] = color;
-        }
-        catch(Exception e)
-        {
-            System.out.println("Error in place piece:");
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * Removes the provided move
-     * this method does not change turns, validate the remove
-     * or unmark the piece as used.
-     * @param move - the desired move
-     */
-    public void removePiece(Move move)
-    {
-
-        try {
-            int leftC = move.getPoint().getX();
-            int topR = move.getPoint().getY();
-
-            boolean[][] shape = shapes.get(move.getPieceNumber()).manipulatedShape(move.isFlip(), move.getRotation());
-            for (int r = 0; r < shape.length; r++)
-                for (int c = 0; c < shape[0].length; c++)
-                    if (shape[r][c])
+                    if (shape[r][c]) {
                         board[topR + r][leftC + c] = EMPTY;
+                    }
+
+            ((color==ORANGE)?orangeUsedShapes:purpleUsedShapes)[move.getPieceNumber()]=false;
+
+            int startC = leftC - 1;
+            int startR = topR-1;
+            int endR = startR + 2 + shape.length;
+            int endC = startC + 2 + shape[0].length;
+
+
+            for (int r = startR; r <= endR; r++)
+                for (int c = startC; c <= endC; c++) {
+
+                    if(isInGrid(c,r) && board[r][c]==EMPTY) {
+                        IntPoint p = new IntPoint(c, r);
+                        if (purpleMoveLocations.contains(p) && !diagonalToColor(c, r, PURPLE))
+                            purpleMoveLocations.remove(p);
+                        else if (!purpleMoveLocations.contains(p) && diagonalToColor(c, r, PURPLE) && notOrthogonalToSelf(c,r,PURPLE))
+                            purpleMoveLocations.add(p);
+
+                        if (orangeMoveLocations.contains(p) && !diagonalToColor(c, r, ORANGE))
+                            orangeMoveLocations.remove(p);
+                        else if (!orangeMoveLocations.contains(p) && diagonalToColor(c, r, ORANGE) && notOrthogonalToSelf(c,r,ORANGE))
+                            orangeMoveLocations.add(p);
+                    }
+                }
+            if(board[4][4]==EMPTY)
+                orangeMoveLocations.add(new IntPoint(4,4));
+            if(board[9][9]==EMPTY)
+                purpleMoveLocations.add(new IntPoint(9,9));
         }
         catch(Exception e)
         {
-            System.out.println("Error in remove place piece:");
+            System.out.println("*********** Remove piece crash");
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -591,8 +665,17 @@ public class BlokusBoard
      */
     public ArrayList<IntPoint> moveLocations(int color)
     {
-        ArrayList<IntPoint> movePoints = new ArrayList<>();
-        if(color==ORANGE && board[4][4]==EMPTY) {
+        ArrayList<IntPoint> empty = new ArrayList<>();
+        if(color!=turn)
+            return empty;
+        else
+        {
+            if(color==ORANGE)
+                return orangeMoveLocations;
+            else
+                return purpleMoveLocations;
+        }
+        /*if(color==ORANGE && board[4][4]==EMPTY) {
             movePoints.add(new IntPoint(4,4));
             return movePoints;
         }
@@ -601,8 +684,7 @@ public class BlokusBoard
             movePoints.add(new IntPoint(9,9));
             return movePoints;
         }
-        else if(color!=turn)
-            return movePoints;
+        else
         else {
             for (int r = 0; r < board.length; r++)
                 for (int c = 0; c < board[0].length; c++) {
@@ -618,7 +700,7 @@ public class BlokusBoard
                 }
 
             return movePoints;
-        }
+        }*/
     }
 
     /**
@@ -638,6 +720,13 @@ public class BlokusBoard
                 (!isInGrid(c, r+1) || board[r+1][c]!=color);
     }
 
+    public boolean diagonalToColor(int c, int r, int color)
+    {
+        return ((isInGrid(c-1,r-1) && board[r-1][c-1]==color) ||
+                (isInGrid(c+1,r+1) && board[r+1][c+1]==color) ||
+                (isInGrid(c+1,r-1) && board[r-1][c+1]==color) ||
+                (isInGrid(c-1,r+1) && board[r+1][c-1]==color));
+    }
     /**
      * Returns turn if the two ArrayLists share a common point
      * @param a - list 1
