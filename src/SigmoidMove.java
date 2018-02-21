@@ -5,8 +5,10 @@ public class SigmoidMove extends Move {
 
     public int getScore(EthanSigma.State state) {
         switch (state) {
+
             default:
                 return Integer.MIN_VALUE;
         }
     }
+
 }

@@ -60,6 +60,21 @@ public class EthanSigma extends Player {
                 end = Math.random() < .5 ? new SigmoidMove(P5, (Math.random() < .5 ? true : false), 0, avaiableMoves.get(0)) : new SigmoidMove(O4, (false), 0, avaiableMoves.get(0));
                 break;
             case Invade:
+                for(int spot=0;spot<avaiableMoves.size();spot++){
+                    for(int shape=0;shape<usableShapePositions.size();shape++){
+                        for(int rotNo=0;rotNo<4;rotNo++){
+                            for(int flip=0;flip<2;flip++){
+                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape),flip==0,rotNo,avaiableMoves.get(spot));
+                                if(board.isValidMove(curr,getColor())){
+                                    end = (end==null||end.getScore(State.Invade)<curr.getScore(State.Invade))?curr:end;
+                                    if(Math.random()<.5&&end.getScore(State.Invade)==curr.getScore(State.Invade)){
+                                        end = curr;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 break;
             case Fill:
                 break;
