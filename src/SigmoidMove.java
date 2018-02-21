@@ -15,4 +15,5 @@ public class SigmoidMove extends Move {
     public double distanceToZone(int[][] zone) {
         return 0;
     }
+
 }
