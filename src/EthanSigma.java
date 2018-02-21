@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+
 public class EthanSigma extends Player {
     enum State {Start, Invade, Block, Fill}
 
@@ -9,6 +10,8 @@ public class EthanSigma extends Player {
         super(color, name);
         state = State.Start;
     }
+
+    public int[][] zones;
 
     public static final int I1 = 0;
     public static final int I2 = 1;
@@ -42,6 +45,13 @@ public class EthanSigma extends Player {
      * @return a valid move, null if non can be found
      */
     public Move getMove(BlokusBoard board) {
+        //Update zones
+        zones = board.getBoard();
+        for (int r = 0; r < 14; r++)
+            for (int c = 0; c < 14; c++) {
+                //if()
+            }
+
         SigmoidMove end = null;
         turn++;
 
