@@ -29,7 +29,7 @@ public class ServersListener implements Runnable
 
     // Category Names
     private ArrayList<String> categories = new ArrayList<String>();
-    private int numberOfGameToPlay = 1000;
+    private int numberOfGameToPlay = 10;
     private CommandToClient commandFromSerever = null;
 
     // name of the connected AI

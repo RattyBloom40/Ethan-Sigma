@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class EthanSigma extends Player {
@@ -35,8 +36,9 @@ public class EthanSigma extends Player {
     public static final int F5 = 17;
     public static final int X5 = 18;
 
-    int turn = 0;
     State state;
+
+    boolean starting = true;
 
     /**
      * Returns a valid move.
@@ -49,7 +51,6 @@ public class EthanSigma extends Player {
         UpdateZones(board.getBoard());
 
         SigmoidMove end = null;
-        turn++;
 
         ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
         ArrayList<Integer> usableShapePositions = new ArrayList<>();
@@ -64,8 +65,10 @@ public class EthanSigma extends Player {
         switch (state) {
             case Start:
                 end = Math.random() < .5 ? new SigmoidMove(P5, Math.random() < .5, 0, avaiableMoves.get(0)) : new SigmoidMove(O4, (false), 0, avaiableMoves.get(0));
+                state = State.Invade;
                 break;
             case Invade:
+                starting = false;
                 for (int spot = 0; spot < avaiableMoves.size(); spot++) {
                     for (int shape = 0; shape < usableShapePositions.size(); shape++) {
                         for (int rotNo = 0; rotNo < 4; rotNo++) {
@@ -132,6 +135,11 @@ public class EthanSigma extends Player {
 
     public void UpdateZones(int[][] newBoard) {
         zones = newBoard;
+        int[][] copy = new int[14][14];
+        for (int r = 0; r < 14; r++)
+            for (int c = 0; c < 14; c++)
+                copy[r][c] = zones[r][c];
+        boolean go = true;
         for (int r = 0; r < 14; r++)
             for (int c = 0; c < 14; c++) {
                 if (zones[r][c] == BlokusBoard.EMPTY) {
@@ -144,28 +152,16 @@ public class EthanSigma extends Player {
                                 else if (zones[r + y][c + x] == BlokusBoard.PURPLE)
                                     numP++;
                             } catch (Exception e) {
-                                e.printStackTrace();
                             }
-                    zones[r][c] = numO > numP ? BlokusBoard.ORANGE : BlokusBoard.PURPLE;
+                    copy[r][c] = numO > numP ? BlokusBoard.ORANGE : BlokusBoard.PURPLE;
                 }
             }
-        for (int r = 0; r < 14; r++)
-            for (int c = 0; c < 14; c++) {
-                if (zones[r][c] == BlokusBoard.EMPTY) {
-                    int numO, numP = numO = 0;
-                    for (int x = 5; x > -6; x--)
-                        for (int y = 5; y > -6; y--)
-                            try {
-                                if (zones[r + y][c + x] == BlokusBoard.ORANGE)
-                                    numO++;
-                                else if (zones[r + y][c + x] == BlokusBoard.PURPLE)
-                                    numP++;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                    zones[r][c] = numO > numP ? BlokusBoard.ORANGE : BlokusBoard.PURPLE;
-                }
-            }
+        for (int[] z : copy) {
+            for (int z1 : z)
+                System.out.print(z1);
+            System.out.println("");
+        }
+        zones = copy;
     }
 
     /**
@@ -173,6 +169,7 @@ public class EthanSigma extends Player {
      *
      * @return a clone of this player
      */
+
     public Player freshCopy() {
         return new EthanSigma(getColor(), getName());
     }
