@@ -11,11 +11,7 @@ public class SigmoidMove extends Move {
             case Invade:
                 ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.moveLocations(BlokusBoard.ORANGE) : board.moveLocations(BlokusBoard.PURPLE);
                 board.makeMove(this, color);
-                ArrayList<IntPoint> newMoves = new ArrayList<>();
-                for (IntPoint point : color == BlokusBoard.ORANGE ? board.moveLocations(BlokusBoard.ORANGE) : board.moveLocations(BlokusBoard.PURPLE))
-                    if (!availableMoves.contains(point))
-                        newMoves.add(point);
-                for (IntPoint point : newMoves)
+                for (IntPoint point : availableMoves)
                     end += 196 - distanceToZone(point, zone, color);
                 //for each spot made available, score+= 196-distance to zone
                 board.undoMovePiece(this, color);
