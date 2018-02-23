@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class EthanSigma extends Player {
     enum State {Start, Invade, Block, Fill}
@@ -52,31 +53,31 @@ public class EthanSigma extends Player {
 
         SigmoidMove end = null;
 
-        ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
+        ArrayList<IntPoint> availableMoves = board.moveLocations(getColor());
         ArrayList<Integer> usableShapePositions = new ArrayList<>();
 
         boolean[] used = (getColor() == BlokusBoard.ORANGE) ? board.getOrangeUsedShapes() : board.getPurpleUsedShapes();
         for (int x = 0; x < used.length; x++)
             if (!used[x])
                 usableShapePositions.add(x);
-        if (usableShapePositions.isEmpty() || avaiableMoves.isEmpty())
+        if (usableShapePositions.isEmpty() || availableMoves.isEmpty())
             return null;
 
         switch (state) {
             case Start:
-                end = Math.random() < .5 ? new SigmoidMove(P5, Math.random() < .5, 0, avaiableMoves.get(0)) : new SigmoidMove(O4, (false), 0, avaiableMoves.get(0));
+                end = new SigmoidMove(I1, Math.random() < .5, new Random().nextInt(4), availableMoves.get(0));
                 state = State.Invade;
                 break;
             case Invade:
                 starting = false;
-                for (int spot = 0; spot < avaiableMoves.size(); spot++) {
+                for (int spot = 0; spot < availableMoves.size(); spot++) {
                     for (int shape = 0; shape < usableShapePositions.size(); shape++) {
                         for (int rotNo = 0; rotNo < 4; rotNo++) {
                             for (int flip = 0; flip < 2; flip++) {
-                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, avaiableMoves.get(spot));
+                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, availableMoves.get(spot));
                                 if (board.isValidMove(curr, getColor())) {
-                                    end = (end == null || end.getScore(State.Invade, zones, getColor(),board) < curr.getScore(State.Invade, zones, getColor(),board)) ? curr : end;
-                                    if (Math.random() < .5 && end.getScore(State.Invade, zones, getColor(),board) == curr.getScore(State.Invade, zones, getColor(),board)) {
+                                    end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
+                                    if (Math.random() < .5 && end.getScore(State.Invade, zones, getColor(), board) == curr.getScore(State.Invade, zones, getColor(), board)) {
                                         end = curr;
                                     }
                                 }
@@ -91,12 +92,14 @@ public class EthanSigma extends Player {
                 break;
         }
 
+        if (end == null)
+            System.out.println("SKIPPING TURN");
         return end;
         /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
-        ArrayList<IntPoint> avaiableMoves = board.moveLocations(getColor());
-        Collections.shuffle(avaiableMoves);
-        //System.out.println("available move locations "+avaiableMoves);
+        ArrayList<IntPoint> availableMoves = board.moveLocations(getColor());
+        Collections.shuffle(availableMoves);
+        //System.out.println("available move locations "+availableMoves);
         ArrayList<Integer> usableShapePositions = new ArrayList<>();
         boolean[] used = (getColor()==BlokusBoard.ORANGE)?board.getOrangeUsedShapes():board.getPurpleUsedShapes();
         for(int x=0; x<used.length; x++)
@@ -104,13 +107,13 @@ public class EthanSigma extends Player {
                 usableShapePositions.add(x);
         //System.out.println("usable pieces "+ Arrays.toString(used));
         Collections.shuffle(usableShapePositions);
-        if(usableShapePositions.isEmpty() ||avaiableMoves.isEmpty())
+        if(usableShapePositions.isEmpty() ||availableMoves.isEmpty())
             return null;
         else
         {
             //System.out.println("hi");
             Move move = null;
-            for(IntPoint movLoc: avaiableMoves)
+            for(IntPoint movLoc: availableMoves)
                 for(Integer position: usableShapePositions)
                 {
                     for(int i=0; i<8;i++) {
@@ -158,9 +161,10 @@ public class EthanSigma extends Player {
             }
         for (int[] z : copy) {
             for (int z1 : z)
-                System.out.print(z1);
+                System.out.print(z1 == getColor() ? "O" : ".");
             System.out.println("");
         }
+        System.out.println("");
         zones = copy;
     }
 

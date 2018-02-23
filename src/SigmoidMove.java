@@ -1,37 +1,40 @@
+import java.util.ArrayList;
+
 public class SigmoidMove extends Move {
     public SigmoidMove(int pieceNumber, boolean flip, int rotation, IntPoint point) {
         super(pieceNumber, flip, rotation, point);
     }
 
-    public double getScore(EthanSigma.State state, int[][]zone, int color, BlokusBoard board) {
+    public double getScore(EthanSigma.State state, int[][] zone, int color, BlokusBoard board) {
+        int end = 0;
         switch (state) {
             case Invade:
+                ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.moveLocations(BlokusBoard.ORANGE) : board.moveLocations(BlokusBoard.PURPLE);
+                board.makeMove(this, color);
+                ArrayList<IntPoint> newMoves = new ArrayList<>();
+                for (IntPoint point : color == BlokusBoard.ORANGE ? board.moveLocations(BlokusBoard.ORANGE) : board.moveLocations(BlokusBoard.PURPLE))
+                    if (!availableMoves.contains(point))
+                        newMoves.add(point);
+                for (IntPoint point : newMoves)
+                    end += 196 - distanceToZone(point, zone, color);
                 //for each spot made available, score+= 196-distance to zone
+                board.undoMovePiece(this, color);
                 break;
         }
-        return Integer.MIN_VALUE;
+        return end;
     }
 
-    public double distanceToZone(int[][] zone, int color, BlokusBoard board) {
-        BlokusBoard copy = board;
-        copy.makeMove(this,color);
-        double dist=200;
-        for(int r=0;r<zone.length;r++){
-            for(int c=0;c<zone.length;c++){
-                if(color==BlokusBoard.ORANGE?zone[r][c]==BlokusBoard.PURPLE:zone[r][c]==BlokusBoard.ORANGE){
-                    if(color==board.ORANGE){
-                        for(int aM=0;aM<copy.orangeMoveLocations.size();aM++){
-                            dist = Math.sqrt(Math.pow(r-(double)copy.orangeMoveLocations.get(aM).getY(),2)+Math.pow(c-(double)copy.orangeMoveLocations.get(aM).getX(),2))<dist?Math.sqrt(Math.pow(r-(double)copy.orangeMoveLocations.get(aM).getY(),2)+Math.pow(c-(double)copy.orangeMoveLocations.get(aM).getX(),2)):dist;
-                        }
-                    }
-                    else{
-                        for(int aM=0;aM<copy.purpleMoveLocations.size();aM++){
-                            dist = Math.sqrt(Math.pow(r-(double)copy.purpleMoveLocations.get(aM).getY(),2)+Math.pow(c-(double)copy.purpleMoveLocations.get(aM).getX(),2))<dist?Math.sqrt(Math.pow(r-(double)copy.purpleMoveLocations.get(aM).getY(),2)+Math.pow(c-(double)copy.purpleMoveLocations.get(aM).getX(),2)):dist;
-                        }
-                    }
+    public double distanceToZone(IntPoint point, int[][] zone, int color) {
+        double end = 1000;
+        for (int r = 0; r < 14; r++)
+            for (int c = 0; c < 14; c++) {
+                double newEnd = 2000;
+                if (zone[r][c] != color) {
+                    newEnd = Math.sqrt(Math.pow(c - point.getX(), 2) + Math.pow(r - point.getY(), 2));
+                    if (newEnd < end)
+                        end = newEnd;
                 }
             }
-        }
-        return dist;
+        return end;
     }
 }
