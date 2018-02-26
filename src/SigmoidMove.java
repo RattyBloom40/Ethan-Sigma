@@ -6,6 +6,8 @@ public class SigmoidMove extends Move {
     }
 
     public double getScore(EthanSigma.State state, int[][] zone, int color, BlokusBoard board) {
+        if (!board.isValidMove(this, color))
+            return 0;
         int end = 0;
         switch (state) {
             case Invade:
@@ -13,12 +15,18 @@ public class SigmoidMove extends Move {
                 board.makeMove(this, color);
                 ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations();
                 for (IntPoint point : availableMoves)
-                    end += 196 - distanceToZone(point, zone, color);
+                    end += 196 - distanceToZone(point, zone, color == BlokusBoard.ORANGE ? BlokusBoard.PURPLE : BlokusBoard.ORANGE);
                 //for each spot made available, score+= 196-distance to zone
-                board.undoMovePiece(this, (color == BlokusBoard.ORANGE ? BlokusBoard.PURPLE : BlokusBoard.ORANGE));
                 break;
         }
         end *= EthanSigma.getSize(getPieceNumber());
+        try {
+            end /= (color == BlokusBoard.PURPLE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size();
+        } catch (Exception e) {
+
+        }
+
+        board.undoMovePiece(this, color);
         return end;
     }
 
