@@ -37,9 +37,27 @@ public class EthanSigma extends Player {
     public static final int F5 = 17;
     public static final int X5 = 18;
 
-    State state;
+    public static int getSize(int shape) {
+        switch (shape) {
+            case I1:
+                return 1;
+            case I2:
+                return 2;
+            case I3:
+            case V3:
+                return 3;
+            case I4:
+            case L4:
+            case T4:
+            case O4:
+            case Z4:
+                return 4;
+            default:
+                return 5;
+        }
+    }
 
-    boolean starting = true;
+    State state;
 
     /**
      * Returns a valid move.
@@ -49,6 +67,15 @@ public class EthanSigma extends Player {
      */
 
     public Move getMove(BlokusBoard board) {
+        boolean starting = true;
+        for (int[] i : board.getBoard())
+            for (int x : i)
+                if (x == getColor()) {
+                    starting = false;
+                    break;
+                }
+        if (starting)
+            state = State.Start;
         UpdateZones(board.getBoard());
 
         SigmoidMove end = null;
@@ -65,11 +92,10 @@ public class EthanSigma extends Player {
 
         switch (state) {
             case Start:
-                end = new SigmoidMove(I1, Math.random() < .5, new Random().nextInt(4), availableMoves.get(0));
+                end = new SigmoidMove(P5, Math.random() < .5, new Random().nextInt(4), availableMoves.get(0));
                 state = State.Invade;
                 break;
             case Invade:
-                starting = false;
                 for (int spot = 0; spot < availableMoves.size(); spot++) {
                     for (int shape = 0; shape < usableShapePositions.size(); shape++) {
                         for (int rotNo = 0; rotNo < 4; rotNo++) {
@@ -77,9 +103,6 @@ public class EthanSigma extends Player {
                                 SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, availableMoves.get(spot));
                                 if (board.isValidMove(curr, getColor())) {
                                     end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
-                                    if (Math.random() < .5 && end.getScore(State.Invade, zones, getColor(), board) == curr.getScore(State.Invade, zones, getColor(), board)) {
-                                        end = curr;
-                                    }
                                 }
                             }
                         }
