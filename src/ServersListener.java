@@ -46,12 +46,8 @@ public class ServersListener implements Runnable
         // Adds testing AIs
         testingAIsAsOrange.add(new RandomAI(board.ORANGE, "Servers Random AI"));
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
-        testingAIsAsOrange.add(new WideSpreadAI(board.ORANGE, "Servers Wide Spread AI"));
-        testingAIsAsPurple.add(new WideSpreadAI(board.PURPLE, "Servers Wide Spread AI"));
         testingAIsAsOrange.add(new BigMoverAI(board.ORANGE, "Servers Big Mover AI"));
         testingAIsAsPurple.add(new BigMoverAI(board.PURPLE, "Servers Big Mover AI"));
-        testingAIsAsOrange.add(new BlockingAI(board.ORANGE, "Servers Blocking AI"));
-        testingAIsAsPurple.add(new BlockingAI(board.PURPLE, "Servers Blocking AI"));
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs

@@ -179,7 +179,7 @@ public class EthanSigma extends Player {
                                     numP++;
                             } catch (Exception e) {
                             }
-                    copy[r][c] = numO > numP ? BlokusBoard.ORANGE : BlokusBoard.PURPLE;
+                    copy[r][c] = numO > numP ? BlokusBoard.ORANGE : (numP > 0 ? BlokusBoard.PURPLE : BlokusBoard.EMPTY);
                 }
             }
         for (int[] z : copy) {
