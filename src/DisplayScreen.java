@@ -26,7 +26,7 @@ public class DisplayScreen extends JFrame implements Runnable, KeyListener
         addKeyListener(this);
         img = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_ARGB);
         setUndecorated(true);
-        setAlwaysOnTop(true);
+
         setVisible(true);
     }
 
@@ -63,7 +63,7 @@ public class DisplayScreen extends JFrame implements Runnable, KeyListener
             {
                 repaint();
 
-                Thread.sleep(35);
+                Thread.sleep(100);
             }
             catch(Exception e)
             {
