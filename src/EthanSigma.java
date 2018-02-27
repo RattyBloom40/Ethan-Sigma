@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -76,6 +77,7 @@ public class EthanSigma extends Player {
                 }
         if (starting)
             state = State.Start;
+        System.out.println(state);
         UpdateZones(board.getBoard());
 
         SigmoidMove end = null;
@@ -96,13 +98,15 @@ public class EthanSigma extends Player {
                 state = State.Invade;
                 break;
             case Invade:
-                for (int spot = 0; spot < availableMoves.size(); spot++) {
-                    for (int shape = 0; shape < usableShapePositions.size(); shape++) {
-                        for (int rotNo = 0; rotNo < 4; rotNo++) {
-                            for (int flip = 0; flip < 2; flip++) {
-                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, availableMoves.get(spot));
-                                if (board.isValidMove(curr, getColor())) {
-                                    end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
+                for (int spotX = 0; spotX < 14; spotX++) {
+                    for (int spotY = 0; spotY < 14; spotY++) {
+                        for (int shape = 0; shape < usableShapePositions.size(); shape++) {
+                            for (int rotNo = 0; rotNo < 4; rotNo++) {
+                                for (int flip = 0; flip < 2; flip++) {
+                                    SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, new IntPoint(spotX, spotY));
+                                    if (board.isValidMove(curr, getColor())) {
+                                        end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
+                                    }
                                 }
                             }
                         }
@@ -114,9 +118,27 @@ public class EthanSigma extends Player {
             case Block:
                 break;
         }
-
-        if (end == null)
+        //fail-safe
+        if (end == null) {
+            for (int spotX = 0; spotX < 14; spotX++) {
+                for (int spotY = 0; spotY < 14; spotY++) {
+                    for (int shape = usableShapePositions.size() - 1; shape >= 0; shape--) {
+                        for (int rotNo = 0; rotNo < 4; rotNo++) {
+                            for (int flip = 0; flip < 2; flip++) {
+                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, new IntPoint(spotX, spotY));
+                                if (board.isValidMove(curr, getColor())) {
+                                    end = (end == null || Math.random() < .7) ? curr : end;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else
             System.out.println("SKIPPING TURN");
+        if (end != null)
+            if (!board.isValidMove(end, getColor()))
+                System.out.println("BAD MOVE");
         return end;
         /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
@@ -170,8 +192,8 @@ public class EthanSigma extends Player {
             for (int c = 0; c < 14; c++) {
                 if (zones[r][c] == BlokusBoard.EMPTY) {
                     int numO, numP = numO = 0;
-                    for (int x = -5; x < 6; x++)
-                        for (int y = -5; y < 6; y++)
+                    for (int x = -3; x < 4; x++)
+                        for (int y = -3; y < 4; y++)
                             try {
                                 if (zones[r + y][c + x] == BlokusBoard.ORANGE)
                                     numO++;
@@ -201,3 +223,49 @@ public class EthanSigma extends Player {
         return new EthanSigma(getColor(), getName());
     }
 }
+
+class SigmoidMove extends Move {
+    public SigmoidMove(int pieceNumber, boolean flip, int rotation, IntPoint point) {
+        super(pieceNumber, flip, rotation, point);
+    }
+
+    public double getScore(EthanSigma.State state, int[][] zone, int color, BlokusBoard board) {
+        if (!board.isValidMove(this, color))
+            return 0;
+        int end = 0;
+        switch (state) {
+            case Invade:
+                board = new BlokusBoard(board);
+                board.makeMove(this, color);
+                ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations();
+                for (IntPoint point : availableMoves)
+                    end += 196 - distanceToZone(point, zone, color == BlokusBoard.ORANGE ? BlokusBoard.PURPLE : BlokusBoard.ORANGE);
+                //for each spot made available, score+= 196-distance to zone
+                break;
+        }
+        end *= EthanSigma.getSize(getPieceNumber());
+        try {
+            end /= (color == BlokusBoard.PURPLE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size();
+        } catch (Exception e) {
+
+        }
+
+        board.undoMovePiece(this, color);
+        return end;
+    }
+
+    public double distanceToZone(IntPoint point, int[][] zone, int color) {
+        double end = 1000;
+        for (int r = 0; r < 14; r++)
+            for (int c = 0; c < 14; c++) {
+                double newEnd = 1000;
+                if (zone[r][c] == color) {
+                    newEnd = Math.abs(Math.sqrt(Math.pow(c - point.getX(), 2) + Math.pow(r - point.getY(), 2)));
+                    if (newEnd < end)
+                        end = newEnd;
+                }
+            }
+        return end;
+    }
+}
+
