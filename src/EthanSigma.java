@@ -93,7 +93,8 @@ public class EthanSigma extends Player {
 
         switch (state) {
             case Start:
-                end = new SigmoidMove(P5, Math.random() < .5, new Random().nextInt(4), availableMoves.get(0));
+                while (end == null || !board.isValidMove(end, getColor()))
+                    end = new SigmoidMove(P5, Math.random() < .5, (int) (Math.random() * 4), availableMoves.get(0));
                 state = State.Invade;
                 break;
             case Invade:
