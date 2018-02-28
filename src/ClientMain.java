@@ -14,7 +14,7 @@ public class ClientMain
     public static final int port = 8621;
 
     // stores the time to sleep between moves
-    public static int moveSleepTime 		= 10;
+    public static int moveSleepTime 		= 0;
     // stores how long to wait after a round finishes
     public static int endSleepTime 			= 0;
     // stores how long to wait after showing who will be playing who
