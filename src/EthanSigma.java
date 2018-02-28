@@ -77,7 +77,6 @@ public class EthanSigma extends Player {
                 }
         if (starting)
             state = State.Start;
-        System.out.println(state);
         UpdateZones(board.getBoard());
 
         SigmoidMove end = null;
