@@ -134,11 +134,12 @@ public class EthanSigma extends Player {
                     }
                 }
             }
-        } else
-            System.out.println("SKIPPING TURN");
+        }
         if (end != null)
             if (!board.isValidMove(end, getColor()))
                 System.out.println("BAD MOVE");
+        if (end != null)
+            System.out.println(end.getPoint());
         return end;
         /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
@@ -204,12 +205,14 @@ public class EthanSigma extends Player {
                     copy[r][c] = numO > numP ? BlokusBoard.ORANGE : (numP > 0 ? BlokusBoard.PURPLE : BlokusBoard.EMPTY);
                 }
             }
+            /*
         for (int[] z : copy) {
             for (int z1 : z)
                 System.out.print(z1 == getColor() ? "O" : ".");
             System.out.println("");
         }
         System.out.println("");
+        */
         zones = copy;
     }
 

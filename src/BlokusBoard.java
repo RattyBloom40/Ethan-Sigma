@@ -595,7 +595,7 @@ public class BlokusBoard
                 System.out.println("The turn is "+ turn);
                 System.out.println("The move is "+ move);
                 System.out.println("Not a valid Move");
-                Thread.sleep(10000);
+                //Thread.sleep(10000);
             }
             catch(Exception e) {
 
