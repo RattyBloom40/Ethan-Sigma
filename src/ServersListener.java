@@ -48,6 +48,8 @@ public class ServersListener implements Runnable
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
         testingAIsAsOrange.add(new BigMoverAI(board.ORANGE, "Servers Big Mover AI"));
         testingAIsAsPurple.add(new BigMoverAI(board.PURPLE, "Servers Big Mover AI"));
+        testingAIsAsOrange.add(new EthanSigma(board.ORANGE, "Servers Ethan Sigma"));
+        testingAIsAsPurple.add(new EthanSigma(board.PURPLE, "Servers Ethan Sigma"));
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs
