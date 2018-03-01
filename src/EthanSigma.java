@@ -138,7 +138,8 @@ public class EthanSigma extends Player {
         if (end != null)
             if (!board.isValidMove(end, getColor()))
                 System.out.println("BAD MOVE");
-        return end;
+        Move newEnd = new Move(end.getPieceNumber(), end.isFlip(), end.getRotation(), end.getPoint());
+        return newEnd;
         /*
         //System.out.println("my color is "+getColor() + " the turn is "+board.getTurn());
         ArrayList<IntPoint> availableMoves = board.moveLocations(getColor());
@@ -246,7 +247,7 @@ class SigmoidMove extends Move {
                 end *= EthanSigma.getSize(getPieceNumber());
                 try {
                     end /= Math.pow(((color == BlokusBoard.PURPLE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size()), 2);
-                }catch(Exception e) {
+                } catch (Exception e) {
                     end = Double.MAX_VALUE;
                 }
                 break;
