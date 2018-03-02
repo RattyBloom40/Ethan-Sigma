@@ -93,11 +93,22 @@ public class EthanSigma extends Player {
 
         switch (state) {
             case Start:
-                end = getColor()==BlokusBoard.ORANGE?new SigmoidMove(X5, false, 0, new IntPoint(3, 3)):new SigmoidMove(X5, false, 0, new IntPoint(8, 8));
-                state = State.Fill;
+                end = getColor() == BlokusBoard.ORANGE ? new SigmoidMove(F5, false, 0, new IntPoint(3, 3)) : new SigmoidMove(F5, false, 0, new IntPoint(8, 8));
+                state = State.Invade;
                 break;
             case Fill:
-                end = getColor()==BlokusBoard.ORANGE?new SigmoidMove(F5, false, 0, new IntPoint(5, 5)):new SigmoidMove(F5, false, 0, new IntPoint(6, 6));
+                for (int spotX = 0; spotX < 14; spotX++) {
+                    for (int spotY = 0; spotY < 14; spotY++) {
+                        for (int rotNo = 0; rotNo < 4; rotNo++) {
+                            for (int flip = 0; flip < 2; flip++) {
+                                SigmoidMove curr = new SigmoidMove(usableShapePositions.get(F5), flip == 0, rotNo, new IntPoint(spotX, spotY));
+                                if (board.isValidMove(curr, getColor())) {
+                                    end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
+                                }
+                            }
+                        }
+                    }
+                }
                 state = State.Invade;
                 break;
             case Invade:

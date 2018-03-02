@@ -49,21 +49,13 @@ public class ServersListener implements Runnable
        // testingAIsAsPurple.add(new BadAI(board.PURPLE, "Non-Moving AI"));
         testingAIsAsOrange.add(new RandomAI(board.ORANGE, "Servers Random AI"));
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
-        testingAIsAsOrange.add(new WideSpreadAI(board.ORANGE, "Servers Wide Spread AI"));
-        testingAIsAsPurple.add(new WideSpreadAI(board.PURPLE, "Servers Wide Spread AI"));
-        testingAIsAsOrange.add(new MostUsableAI(board.ORANGE, "Servers Most Usable Moves AI"));
-        testingAIsAsPurple.add(new MostUsableAI(board.PURPLE, "Servers Most Usable Moves AI"));
         testingAIsAsOrange.add(new BigMoverAI(board.ORANGE, "Servers Big Mover AI"));
         testingAIsAsPurple.add(new BigMoverAI(board.PURPLE, "Servers Big Mover AI"));
-        testingAIsAsOrange.add(new BlockingAI(board.ORANGE, "Servers Blocking AI"));
-        testingAIsAsPurple.add(new BlockingAI(board.PURPLE, "Servers Blocking AI"));
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs
-        seventhPeriodAIsAsOrange.add(new EthanSigma(board.ORANGE, "EthanSigma AI"));
-        seventhPeriodAIsAsPurple.add(new EthanSigma(board.PURPLE, "EthanSigma AI"));
-        seventhPeriodAIsAsOrange.add(new TommyAI(board.ORANGE, "TommyAI"));
-        seventhPeriodAIsAsPurple.add(new TommyAI(board.PURPLE, "TommyAI"));
+        seventhPeriodAIsAsOrange.add(new EthanSigma(board.ORANGE, "Ethan Sigma X"));
+        seventhPeriodAIsAsPurple.add(new EthanSigma(board.PURPLE, "Ethan Sigma X"));
         // Load Categories
         categories.add("Test AIs");
         categories.add("Fourth Period");
