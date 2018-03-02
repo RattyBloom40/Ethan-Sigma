@@ -1,6 +1,7 @@
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ServersListener implements Runnable
 {
@@ -44,20 +45,29 @@ public class ServersListener implements Runnable
         this.os			= os;
 
         // Adds testing AIs
+        //testingAIsAsOrange.add(new BadAI(board.ORANGE, "Non-Moving AI"));
+       // testingAIsAsPurple.add(new BadAI(board.PURPLE, "Non-Moving AI"));
         testingAIsAsOrange.add(new RandomAI(board.ORANGE, "Servers Random AI"));
         testingAIsAsPurple.add(new RandomAI(board.PURPLE, "Servers Random AI"));
+        testingAIsAsOrange.add(new WideSpreadAI(board.ORANGE, "Servers Wide Spread AI"));
+        testingAIsAsPurple.add(new WideSpreadAI(board.PURPLE, "Servers Wide Spread AI"));
+        testingAIsAsOrange.add(new MostUsableAI(board.ORANGE, "Servers Most Usable Moves AI"));
+        testingAIsAsPurple.add(new MostUsableAI(board.PURPLE, "Servers Most Usable Moves AI"));
         testingAIsAsOrange.add(new BigMoverAI(board.ORANGE, "Servers Big Mover AI"));
         testingAIsAsPurple.add(new BigMoverAI(board.PURPLE, "Servers Big Mover AI"));
-        testingAIsAsOrange.add(new EthanSigma(board.ORANGE, "Servers Ethan Sigma"));
-        testingAIsAsPurple.add(new EthanSigma(board.PURPLE, "Servers Ethan Sigma"));
+        testingAIsAsOrange.add(new BlockingAI(board.ORANGE, "Servers Blocking AI"));
+        testingAIsAsPurple.add(new BlockingAI(board.PURPLE, "Servers Blocking AI"));
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs
-
+        seventhPeriodAIsAsOrange.add(new EthanSigma(board.ORANGE, "EthanSigma AI"));
+        seventhPeriodAIsAsPurple.add(new EthanSigma(board.PURPLE, "EthanSigma AI"));
+        seventhPeriodAIsAsOrange.add(new TommyAI(board.ORANGE, "TommyAI"));
+        seventhPeriodAIsAsPurple.add(new TommyAI(board.PURPLE, "TommyAI"));
         // Load Categories
         categories.add("Test AIs");
-        //categories.add("Fourth Period");
-        //categories.add("Seventh Period");
+        categories.add("Fourth Period");
+        categories.add("Seventh Period");
     }
 
     /**
@@ -118,11 +128,31 @@ public class ServersListener implements Runnable
                         break;
 
                     }
-                    else if(categoryIndex == 2)
+                    else if(categoryIndex == 2)//////////////////////////////////////////////
                     {
-                        //System.out.println("Category not implemented");
-                        break;
+                        for(Player p: seventhPeriodAIsAsOrange)
+                        {
+                            names.add(p.getName());
+                        }
 
+                        commandFromSerever = new CommandToClient(CommandToClient.AI_SELECTION,names);
+                        os.writeObject(commandFromSerever);
+                        os.reset();
+
+                        CommandToServer pickedAI = (CommandToServer)is.readObject();
+                        int ai_Index =(Integer) pickedAI.getCommandData();
+                        //System.out.println("ai Number " +ai_Index);
+
+                        if(ai_Index >= seventhPeriodAIsAsOrange.size())
+                        {
+                            System.out.println("Bad AI Index");
+                            break;
+                        }
+                        else
+                        {
+                            opponentAsOrange = seventhPeriodAIsAsOrange.get(ai_Index).freshCopy();
+                            opponentAsPurple = seventhPeriodAIsAsPurple.get(ai_Index).freshCopy();
+                        }
                     }
                     else
                     {
@@ -209,7 +239,9 @@ public class ServersListener implements Runnable
                             else
                             {
                                 System.out.println("ORANGE Connected AI made an invalid move "+m);
-                                //System.out.println(Arrays.deepToString(board.getShapes().get(m.getPieceNumber()).manipulatedShape(m.isFlip(), m.getRotation())));
+                                System.out.println(board);
+                                System.out.println(m);
+                                System.out.println(Arrays.deepToString(board.getShapes().get(m.getPieceNumber()).manipulatedShape(m.isFlip(), m.getRotation())));
                                 board.orangeSkips();
                                 //Thread.sleep(500);
                                 commandFromSerever = new CommandToClient(CommandToClient.FAILED_MOVE);
@@ -225,6 +257,7 @@ public class ServersListener implements Runnable
 
                             if(m==null)
                             {
+
                                 System.out.println("PURPLE Server AI skipps");
                                 //Thread.sleep(500);
                                 board.purpleSkips();
@@ -235,6 +268,10 @@ public class ServersListener implements Runnable
                             }
                             else if(board.isValidMove(m,BlokusBoard.PURPLE))
                             {
+                                System.out.println("PURPLE Server made an invalid move "+m);
+                                System.out.println(board);
+                                System.out.println(m);
+                                System.out.println(Arrays.deepToString(board.getShapes().get(m.getPieceNumber()).manipulatedShape(m.isFlip(), m.getRotation())));
                                 board.makeMove(m,BlokusBoard.PURPLE);
                                 commandFromSerever = new CommandToClient(CommandToClient.OPPONENT_MOVE,m);
                                 os.writeObject(commandFromSerever);
@@ -301,8 +338,10 @@ public class ServersListener implements Runnable
                             }
                             else if(board.isValidMove(m,BlokusBoard.ORANGE))
                             {
-                                //System.out.println("ORANGE Sever AI moves"+m);
-                                //System.out.println(Arrays.deepToString(board.getShapes().get(m.getPieceNumber()).manipulatedShape(m.isFlip(), m.getRotation())));
+                                System.out.println("ORANGE Server made an invalid move "+m);
+                                System.out.println(board);
+                                System.out.println(m);
+                                System.out.println(Arrays.deepToString(board.getShapes().get(m.getPieceNumber()).manipulatedShape(m.isFlip(), m.getRotation())));
                                 board.makeMove(m,BlokusBoard.ORANGE);
                                 commandFromSerever = new CommandToClient(CommandToClient.OPPONENT_MOVE,m);
                                 os.writeObject(commandFromSerever);

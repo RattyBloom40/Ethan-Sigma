@@ -54,8 +54,10 @@ public class RandomAI extends Player
                             {
                                 IntPoint topLeft = new IntPoint(movLoc.getX()+c,movLoc.getY()+r);
                                 Move test = new Move(position,flip,rotation,topLeft);
-                                if(board.isValidMove(test,getColor()))
+                                if(board.isValidMove(test,getColor())) {
+
                                     return test;
+                                }
                             }
                     }
                 }

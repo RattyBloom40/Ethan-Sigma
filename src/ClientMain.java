@@ -9,7 +9,7 @@ import java.util.*;
 public class ClientMain
 {
     // stores the servers address
-    public static final String ip = "127.0.0.1";
+    public static final String ip = "T155189";//"127.0.0.1";
     // stores the port to use for connecting to the sever
     public static final int port = 8621;
 
@@ -177,7 +177,9 @@ public class ClientMain
                             }
                             else if(comFromServer.getCommand()==CommandToClient.OPPONENT_MOVE)
                             {
+                                //System.out.println("1 opp");
                                 board.makeMove((Move)comFromServer.getCommandData(),getOpponentValue(currentlyPlaying.getColor()));
+                               // System.out.println("2 opp");
                                 Thread.sleep(moveSleepTime);
 
                             }
@@ -205,7 +207,9 @@ public class ClientMain
                             }
                             else if(comFromServer.getCommand()==CommandToClient.MAKE_MOVE)
                             {
+                               // System.out.println("1 self");
                                 m = currentlyPlaying.getMove(new BlokusBoard(board));
+                              //  System.out.println(m+"2 self");
                                 os.reset();
                                 os.writeObject(new CommandToServer(CommandToServer.MOVE,m));
                                 os.reset();

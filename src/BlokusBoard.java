@@ -562,7 +562,7 @@ public class BlokusBoard
                             purpleMoveLocations.add(p);
                     }
                 purpleLastMove=move;
-                orangeSkipped = false;
+                purpleSkipped = false;
             }
             changeTurns();
             int endR = topR+1+shape.length;
@@ -583,23 +583,23 @@ public class BlokusBoard
             return true;
         }
         else {
-            if(turn==ORANGE) {
-                orangeSkips();
-            }
-            else{
-                purpleSkips();
-            }
             try
             {
                 System.out.println("The player is "+ color);
                 System.out.println("The turn is "+ turn);
                 System.out.println("The move is "+ move);
                 System.out.println("Not a valid Move");
-                //Thread.sleep(10000);
+                Thread.sleep(10000);
             }
-            catch(Exception e) {
+            catch(Exception e)
+            { }
+            if(turn==ORANGE) {
+                orangeSkips();
+            }
+            else{
+                purpleSkips();
+            }
 
-            }
             return false;
         }
     }
@@ -728,16 +728,10 @@ public class BlokusBoard
      */
     public ArrayList<IntPoint> moveLocations(int color)
     {
-        ArrayList<IntPoint> empty = new ArrayList<>();
-        if(color!=turn)
-            return empty;
+        if(color==ORANGE)
+            return orangeMoveLocations;
         else
-        {
-            if(color==ORANGE)
-                return orangeMoveLocations;
-            else
-                return purpleMoveLocations;
-        }
+            return purpleMoveLocations;
     }
 
     /**
@@ -795,5 +789,10 @@ public class BlokusBoard
     {
         purpleSkipped=true;
         changeTurns();
+    }
+
+    public void setTurn(int turn)
+    {
+        this.turn=turn;
     }
 }
