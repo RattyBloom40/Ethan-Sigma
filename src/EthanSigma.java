@@ -29,14 +29,14 @@ public class EthanSigma extends Player {
     public static final int L5 = 10;
     public static final int N5 = 11;
     public static final int P5 = 12;
-    public static final int U5 = 11;
-    public static final int Y5 = 12;
-    public static final int T5 = 13;
-    public static final int V5 = 14;
-    public static final int W5 = 15;
-    public static final int Z5 = 16;
-    public static final int F5 = 17;
-    public static final int X5 = 18;
+    public static final int U5 = 13;
+    public static final int Y5 = 14;
+    public static final int T5 = 15;
+    public static final int V5 = 16;
+    public static final int W5 = 17;
+    public static final int Z5 = 18;
+    public static final int F5 = 19;
+    public static final int X5 = 20;
 
     public static int getSize(int shape) {
         switch (shape) {
@@ -93,8 +93,11 @@ public class EthanSigma extends Player {
 
         switch (state) {
             case Start:
-                while (end == null || !board.isValidMove(end, getColor()))
-                    end = new SigmoidMove(P5, Math.random() < .5, (int) (Math.random() * 4), availableMoves.get(0));
+                end = getColor()==BlokusBoard.ORANGE?new SigmoidMove(X5, false, 0, new IntPoint(3, 3)):new SigmoidMove(X5, false, 0, new IntPoint(8, 8));
+                state = State.Fill;
+                break;
+            case Fill:
+                end = getColor()==BlokusBoard.ORANGE?new SigmoidMove(F5, false, 0, new IntPoint(5, 5)):new SigmoidMove(F5, false, 0, new IntPoint(6, 6));
                 state = State.Invade;
                 break;
             case Invade:
@@ -112,8 +115,6 @@ public class EthanSigma extends Player {
                         }
                     }
                 }
-                break;
-            case Fill:
                 break;
             case Block:
                 break;
