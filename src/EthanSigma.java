@@ -120,6 +120,8 @@ public class EthanSigma extends Player {
                 state = State.Invade;
                 break;
             case Invade:
+            case Block:
+                state = board.moveLocations(getColor()).size() > board.moveLocations(getOtherColor()).size()-4 ? State.Invade : State.Block;
                 for (int spotX = 0; spotX < 14; spotX++) {
                     for (int spotY = 0; spotY < 14; spotY++) {
                         for (int shape = 0; shape < usableShapePositions.size(); shape++) {
@@ -127,15 +129,13 @@ public class EthanSigma extends Player {
                                 for (int flip = 0; flip < 2; flip++) {
                                     SigmoidMove curr = new SigmoidMove(usableShapePositions.get(shape), flip == 0, rotNo, new IntPoint(spotX, spotY));
                                     if (board.isValidMove(curr, getColor())) {
-                                        end = (end == null || end.getScore(State.Invade, zones, getColor(), board) < curr.getScore(State.Invade, zones, getColor(), board)) ? curr : end;
+                                        end = (end == null || end.getScore(state, zones, getColor(), board) < curr.getScore(state, zones, getColor(), board)) ? curr : end;
                                     }
                                 }
                             }
                         }
                     }
                 }
-                break;
-            case Block:
                 break;
         }
         //fail-safe
@@ -261,9 +261,9 @@ class SigmoidMove extends Move {
         board = new BlokusBoard(board);
         board.makeMove(this, color);
         board.changeTurns();
+        ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations();
         switch (state) {
             case Invade:
-                ArrayList<IntPoint> availableMoves = color == BlokusBoard.ORANGE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations();
                 for (IntPoint point : availableMoves)
                     end += 196 - distanceToZone(point, zone, color == BlokusBoard.ORANGE ? BlokusBoard.PURPLE : BlokusBoard.ORANGE);
                 //for each spot made available, score+= 196-distance to zone
@@ -275,7 +275,19 @@ class SigmoidMove extends Move {
                 }
                 break;
             case Block:
-
+                end += (color == BlokusBoard.ORANGE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size();
+                end -= 2 * (color == BlokusBoard.PURPLE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size();
+                for (IntPoint point : availableMoves)
+                    end += .1 * (196 - distanceToZone(point, zone, color == BlokusBoard.ORANGE ? BlokusBoard.PURPLE : BlokusBoard.ORANGE));
+                end += EthanSigma.getSize(getPieceNumber());
+                //for each spot made available, score+= 196-distance to zone
+                /*
+                try {
+                    end /= Math.pow(((color == BlokusBoard.PURPLE ? board.getOrangeMoveLocations() : board.getPurpleMoveLocations()).size()), 2);
+                } catch (Exception e) {
+                    end = Double.MAX_VALUE;
+                }
+                */
                 break;
         }
         board.undoMovePiece(this, color);

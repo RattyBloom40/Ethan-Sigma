@@ -54,8 +54,8 @@ public class ServersListener implements Runnable
         // Adds fourth Period AIs
 
         // Adds Seventh Period AIs
-        seventhPeriodAIsAsOrange.add(new EthanSigma(board.ORANGE, "Ethan Sigma X"));
-        seventhPeriodAIsAsPurple.add(new EthanSigma(board.PURPLE, "Ethan Sigma X"));
+        seventhPeriodAIsAsOrange.add(new EthanSigma(board.ORANGE, "Servers Ethan Sigma"));
+        seventhPeriodAIsAsPurple.add(new EthanSigma(board.PURPLE, "Servers Ethan Sigma"));
         // Load Categories
         categories.add("Test AIs");
         categories.add("Fourth Period");
