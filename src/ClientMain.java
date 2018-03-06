@@ -9,7 +9,7 @@ import java.util.*;
 public class ClientMain
 {
     // stores the servers address
-    public static final String ip = "127.0.0.1";//"T155189";
+    public static final String ip = /*"127.0.0.1";*/"T155189";
     // stores the port to use for connecting to the sever
     public static final int port = 8621;
 

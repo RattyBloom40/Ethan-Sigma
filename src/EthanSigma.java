@@ -94,11 +94,11 @@ public class EthanSigma extends Player {
         switch (state) {
             case Start:
                 if(getColor()==BlokusBoard.ORANGE){
-                    end = new SigmoidMove(F5, false, 0, new IntPoint(3,3));
+                    end = new SigmoidMove(X5, false, 0, new IntPoint(3,3));
                 }
                 else if(getColor()==BlokusBoard.PURPLE){
                     //while(end==null||!board.isValidMove(end,getColor())) {
-                        end = new SigmoidMove(F5, false,2,new IntPoint(8,8));
+                        end = new SigmoidMove(W5, false,0,new IntPoint(7,7));
                     //}
                 }
                 //end = getColor() == BlokusBoard.ORANGE ? new SigmoidMove(F5, false, 0, new IntPoint(3, 3)) : new SigmoidMove(F5, false, 0, new IntPoint(8, 8));
